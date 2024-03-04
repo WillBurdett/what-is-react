@@ -1,12 +1,14 @@
 import { EXAMPLES } from "../data";
-import TabButton from "./TabButton"
+import Section from "./Section";
+import TabButton from "./TabButton";
 // this is a hook or hook function
 // must be inside component functions or other (custom) hooks
 // only call Hooks at top level i.e. not in if statements etc.
 // when state is changed, it tells component
 import { useState } from "react";
+import Tabs from "./Tabs";
 
-export default function Examples(){
+export default function Examples() {
   // by default React components will only exectue component functions once
   // they need to be told when to update
   // when told, it'll compare the jsx files and update the ui
@@ -34,10 +36,13 @@ export default function Examples(){
       </div>
     );
   }
-    return(
-        <section id="examples">
-          <h2>Examples</h2>
-          <menu>
+  return (
+    // props like 'id' on custom components are not
+    // automatically forwarded to returned components
+    <Section title="Examples" id="examples">
+      <Tabs
+        buttons={
+          <>
             <TabButton
               isSelected={selectedTopic === "components"}
               onSelect={() => handleSelect("components")}
@@ -62,9 +67,13 @@ export default function Examples(){
             >
               State
             </TabButton>
-          </menu>
-          {/* --- OPTION 1 FOR CONDITIONAL RENDERING */}
-          {/* {!selectedTopic && <p>Please select a topic.</p>}
+          </>
+        }
+      >
+        {tabContent}
+      </Tabs>
+      {/* --- OPTION 1 FOR CONDITIONAL RENDERING */}
+      {/* {!selectedTopic && <p>Please select a topic.</p>}
           {selectedTopic && (
             <div id="tab-content">
               <h3>{EXAMPLES[selectedTopic].title}</h3>
@@ -74,8 +83,8 @@ export default function Examples(){
               </pre>
             </div>
           )} */}
-          {/* --- OPTION 2 FOR CONDITIONAL RENDERING */}
-          {/* {!selectedTopic ? (
+      {/* --- OPTION 2 FOR CONDITIONAL RENDERING */}
+      {/* {!selectedTopic ? (
             <p>Please select a topic.</p>
           ) : (
             <div id="tab-content">
@@ -86,8 +95,8 @@ export default function Examples(){
               </pre>
             </div>
           )} */}
-          {/* --- OPTION 3 FOR CONDITIONAL RENDERING */}
-          {tabContent}
-        </section>
-    )
+      {/* --- OPTION 3 FOR CONDITIONAL RENDERING */}
+      {/* {tabContent} */}
+    </Section>
+  );
 }
