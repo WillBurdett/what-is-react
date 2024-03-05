@@ -41,6 +41,7 @@ export default function Examples() {
     // automatically forwarded to returned components
     <Section title="Examples" id="examples">
       <Tabs
+      // you can parse custom components too with {Braces}
         buttons={
           <>
             <TabButton

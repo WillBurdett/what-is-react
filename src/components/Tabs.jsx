@@ -1,7 +1,9 @@
-export default function Tabs({ children, buttons }) {
+// ButtonsContainer = 'menu' sets menu as a default value
+
+export default function Tabs({ children, buttons, ButtonsContainer = 'menu' }) {
   return (
     <>
-      <menu>{buttons}</menu>
+      <ButtonsContainer>{buttons}</ButtonsContainer>
       {children}
     </>
   );
